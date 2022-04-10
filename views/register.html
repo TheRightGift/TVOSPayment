@@ -1,0 +1,146 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>TVOZ Subscription - Home</title>
+		<link href="./css/materialize.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./fonts/material-icons.css">
+        <link href="./css/ozTV.css" type="text/css" rel="stylesheet"/>
+        <style>
+            @font-face {
+                font-family: myFont;
+                src: url(../fonts/raleway/Raleway-Regular.ttf);
+            }
+            @font-face {
+                font-family: myHeadingFont;
+                src: url(../fonts/raleway/Raleway-SemiBold.ttf);
+            }
+
+            body, html, #container {
+                height: 100%;
+            }
+            body {
+                margin: 0px;
+                padding: 0px;
+                font-family: myFont;
+                background-image: url(./img/background.jpg);
+                background-size: cover;
+                background-position: center;
+                width: 100%;
+                height: 100%;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                font-size: 15px;
+            }
+            /**home**/
+            /* #homeUiBgrd {
+                
+            } */
+
+            #homeLogin {
+                position: relative;
+                height: 100%;
+                left: 50%;
+                width: 50%;
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 10px;
+            }
+
+            #welcome {
+                text-align: center;
+                position: relative;
+                top: 2%;
+            }
+
+            #welcome h1 {
+                margin-top: 1rem;
+                margin-bottom: 0px;
+                color: rgb(238, 16, 83);
+                font-family: myHeadingFont;
+            }
+
+            #login {
+                position: relative;
+                top: 20px;
+            }
+
+            #login h2 {
+                color: rgb(238, 16, 83);
+                font-family: myHeadingFont;
+                font-size: 2rem;
+            }
+            /**home**/
+        </style>
+	</head>
+	<body ng-app="ozApp" ng-controller="ozController">
+		<div id="homeLogin">
+            <div id="welcome">
+                <h1>TVOZ</h1>
+            </div>
+            <div id="login">
+                <h2 class="centre">Staff Register</h2>
+                <form>
+                    <div class="row">
+                        <div class="col offset-s1 col s10">
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <input name="firstname" id="firstname" type="text"  class="validate">
+                                    <label for="firstname">Firstname</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input name="othername" id="othername" type="text"  class="validate">
+                                    <label for="othername">Othername</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input name="lastname" id="lastname" type="text"  class="validate">
+                                    <label for="lastname">Lastname</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s6">
+                                    <input name="phone" id="phone" type="text"  class="validate">
+                                    <label for="phone">Phone</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <input name="email" id="email" type="email"  class="validate">
+                                    <label for="email">Email</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s4">
+                                    <input name="username" id="username" type="text"  class="validate">
+                                    <label for="username">Username</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input name="password" id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                                <div class="input-field col s4">
+                                    <input name="cPass" id="cPass" type="password" class="validate">
+                                    <label for="cPass">Confirm Password</label>
+                                </div>
+                            </div>
+                            <div class="input-field col s12 center">
+                                <a class="waves-effect waves-light btn" ng-click="register()"><i class="material-icons left">send</i>Register</a> 
+                                Or <a href="/">Login</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+		<script src="./js/socket.js"></script>
+		<script src="./js/jquery-3.0.0.min.js"></script>
+		<script src="./js/materialize.min.js"></script>
+		<script src="./js/angular.min.js"></script>
+		<script src="./js/ozTV.js"></script>
+
+	</body>
+</html>
+
+
+
+

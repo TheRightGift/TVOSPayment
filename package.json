@@ -1,0 +1,26 @@
+{
+  "name": "tvozpayment",
+  "version": "1.0.0",
+  "description": "Payment server for TVOZ",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "g'OZieCHUKWU",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "hjs": "^0.0.6",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "mongoose": "^5.9.10",
+    "morgan": "^1.10.0",
+    "mustache-express": "^1.3.0",
+    "socket.io": "^2.3.0"
+  }
+}

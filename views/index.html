@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>TVOZ Subscription - Home</title>
+		<link href="./css/materialize.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./fonts/material-icons.css">
+        <link href="./css/ozTV.css" type="text/css" rel="stylesheet"/>
+        <style>
+            @font-face {
+                font-family: myFont;
+                src: url(../fonts/raleway/Raleway-Regular.ttf);
+            }
+            @font-face {
+                font-family: myHeadingFont;
+                src: url(../fonts/raleway/Raleway-SemiBold.ttf);
+            }
+
+            body, html, #container {
+                height: 100%;
+            }
+            body {
+                margin: 0px;
+                padding: 0px;
+                font-family: myFont;
+                background-image: url(./img/background.jpg);
+                background-size: cover;
+                background-position: center;
+                width: 100%;
+                height: 100%;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                font-size: 15px;
+            }
+            /**home**/
+            /* #homeUiBgrd {
+                
+            } */
+
+            #homeLogin {
+                position: relative;
+                height: 100%;
+                left: 60%;
+                width: 40%;
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 10px;
+            }
+
+            #welcome {
+                text-align: center;
+                position: relative;
+                top: 5%;
+            }
+
+            #welcome h1 {
+                margin-bottom: 0px;
+                color: rgb(238, 16, 83);
+                font-family: myHeadingFont;
+            }
+            #welcome h2 {
+                margin-top: 4px;
+                font-size: 16px;
+            }
+
+            #login {
+                position: relative;
+                top: 30px;
+            }
+
+            #login h2 {
+                color: rgb(238, 16, 83);
+                font-family: myHeadingFont;
+            }
+            /**home**/
+        </style>
+	</head>
+	<body ng-app="ozApp" ng-controller="ozController">
+		<div id="homeLogin">
+            <div id="welcome">
+                <h1>TVOZ</h1>
+                <h2>(Subscription Dashboard Gateway)</h2>
+            </div>
+            <div id="login">
+                <h2 class="centre">Executive Login</h2>
+                <form>
+                    <div class="row">
+                        <div class="col offset-s1 col s10">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input name="username" id="username" type="text"  class="validate">
+                                    <label for="username">Username</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input name="password" id="password" type="password" class="validate">
+                                    <label for="password">Password</label>
+                                </div>
+                            </div>
+                            <div class="input-field col s12 center">
+                                <button class="waves-effect waves-light btn" ng-click="login()"><i class="material-icons left">send</i>Login</button> 
+                                Or <a href="/register">Register</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+		<script src="./js/socket.js"></script>
+		<script src="./js/jquery-3.0.0.min.js"></script>
+		<script src="./js/materialize.min.js"></script>
+		<script src="./js/angular.min.js"></script>
+		<script src="./js/ozTV.js"></script>
+
+	</body>
+</html>
+
+
+
+

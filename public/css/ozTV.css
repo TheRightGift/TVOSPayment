@@ -1,0 +1,19 @@
+/**General**/
+.hide{
+    display: none;
+}
+.centre {
+    text-align: center;
+}
+.gutter {
+    margin-top: 20px
+}
+#vod, #tv {
+    padding: 0rem 1.5rem;
+}
+#vod h3, #tv h3 {
+    margin-top: 0rem;
+}
+#days28 .input-field {
+    margin-top: 0px;
+}

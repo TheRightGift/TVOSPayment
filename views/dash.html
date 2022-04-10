@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>TVOZ Subscription - Dashboard</title>
+		<link href="./css/materialize.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="./fonts/material-icons.css">
+        <link href="./css/ozTV.css" type="text/css" rel="stylesheet"/>
+        <script>
+			if (typeof(Storage) !== "undefined") {
+				let confirmed = localStorage.getItem("confirmed");
+                let auth = localStorage.getItem("auth");
+                
+				if(confirmed == undefined || confirmed == 'N' || auth != 'Exec'){
+					//redirect to dashboard
+					window.location.href = "/";
+				}                
+			} else {
+				// Sorry! No Web Storage support..
+		
+				M.toast({html: 'Please update your browser!'});
+			}
+        </script>
+        <style>
+            .tabs .tab a.active#m, .tabs .tab a#m {
+                background-color: transparent;
+                color: #26a69a;
+            }
+            .tabs .tab a.active#w, .tabs .tab a#w {
+                background-color: transparent;
+                color: #9c27b0;
+            }
+            .tabs .tab a.active#d, .tabs .tab a#d {
+                background-color: transparent;
+                color: #3f51b5;
+            }
+            .tabs .tab a.active#dm, .tabs .tab a#dm {
+                background-color: transparent;
+                color: #cddc39;
+            }
+        </style>
+	</head>
+	<body ng-app="ozApp" ng-controller="ozController" onunload="logout()">
+		<nav>
+            <div class="container">
+                <div class="nav-wrapper">                
+                    <a href="/" class="brand-logo">TVOZ <small>Subscription Dash</small></a>
+                </div>
+            </div>			
+        </nav>
+        
+        <div class="row">
+            <div class="col s12">
+                <div class="container">
+                    <h2>Subscription PINs</h2>
+                </div>
+                
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <ul class="tabs">
+                                <li class="tab col s3"><a class="active" href="#days28" id="m"><s>N</s>1,500/28 days</a></li>
+                                <li class="tab col s3"><a href="#days7" id="w"><s>N</s>500/7 days</a></li>
+                                <li class="tab col s3"><a href="#days1" id="d"><s>N</s>200/1 day</a></li>
+                                <li class="tab col s3"><a href="#demo" id="dm">DEMO/1 days</a></li>
+                            </ul>
+                        </div>
+                        <div id="days28" class="col s12">
+                            <div class="row gutter">
+                                <div class="col s6">
+                                    <div class="input-field col s12">
+                                        <input id="search" type="search" class="validate" ng-keyup="pinMSearch($event, 'pinMTable')">
+                                        <label>Search Monthly PIN...</label>
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    {{#pinMArrAvailablePins}}
+                                        <a class="waves-effect waves-light btn col" ng-click="genPin(1)"><i class="material-icons right">tap_and_play</i>Generate 1000 PIN (<small><s>N</s>1,500/28 days</small>)</a>
+                                    {{/pinMArrAvailablePins}}
+                                    {{^pinMArrAvailablePins}}
+                                        <button disabled class="waves-effect waves-light btn" ng-click="genPin(1)"><i class="material-icons right">tap_and_play</i>Generate 1000 PIN (<small><s>N</s>1,500/28 days</small>)</button>
+                                    {{/pinMArrAvailablePins}}  
+                                </div>                                                              
+                            </div>  
+                            <div class="responsive-table">
+                                <table id="pinMTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Serial</th>
+                                            <th>PIN</th>
+                                            <th>Used</th>
+                                            <th>UsedBy</th>
+                                            <th>Date Used</th>
+                                        </tr>
+                                    </thead>
+                            
+                                    <tbody>
+                                        {{#pinsM}}
+                                            {{#hasSold}}
+                                                <tr class="red lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>{{usedBy}}</td> 
+                                                    <td>{{dateUsed}}</td>                                           
+                                                </tr>
+                                            {{/hasSold}}
+                                            {{^hasSold}}
+                                                <tr class="teal lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>?</td>   
+                                                    <td>?</td>                                         
+                                                </tr>
+                                            {{/hasSold}}
+                                        {{/pinsM}}
+                                    </tbody>
+                                </table>
+                            </div>                          
+                        </div>
+                        <div id="days7" class="col s12">
+                            <div class="row gutter">
+                                <div class="col s6">
+                                    <div class="input-field col s12">
+                                        <input id="searchW" type="search" class="validate" ng-keyup="pinMSearch($event, 'pinWTable')">
+                                        <label>Search Weekly PIN...</label>
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    {{#pinWArrAvailablePins}}
+                                        <a class="waves-effect waves-light btn purple darken-4" ng-click="genPin(2)"><i class="material-icons right">tap_and_play</i>Generate 500 PIN (<small><s>N</s>500/7 days</small>)</a>
+                                    {{/pinWArrAvailablePins}}
+                                    {{^pinWArrAvailablePins}}
+                                        <button disabled class="waves-effect waves-light btn purple darken-4" ng-click="genPin(2)"><i class="material-icons right">tap_and_play</i>Generate 500 PIN (<small><s>N</s>500/7 days</small>)</button>
+                                    {{/pinWArrAvailablePins}}  
+                                </div>                                                               
+                            </div>    
+                            <div class="responsive-table">
+                                <table id="pinWTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Serial</th>
+                                            <th>PIN</th>
+                                            <th>Used</th>
+                                            <th>UsedBy</th>
+                                            <th>Date Used</th>
+                                        </tr>
+                                    </thead>
+                            
+                                    <tbody>
+                                        {{#pinsW}}
+                                            {{#hasSold}}
+                                                <tr class="red lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>{{usedBy}}</td>  
+                                                    <td>{{dateUsed}}</td>                                          
+                                                </tr>
+                                            {{/hasSold}}
+                                            {{^hasSold}}
+                                                <tr class="purple lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>?</td>    
+                                                    <td>?</td>                                         
+                                                </tr>
+                                            {{/hasSold}}
+                                        {{/pinsW}}
+                                    </tbody>
+                                </table>
+                            </div>                         
+                        </div>
+                        <div id="days1" class="col s12">
+                            <div class="row gutter">
+                                <div class="col s6">
+                                    <div class="input-field col s12">
+                                        <input id="searchD" type="search" class="validate" ng-keyup="pinMSearch($event, 'pinDTable')">
+                                        <label>Search Daily PIN...</label>
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    {{#pinDArrAvailablePins}}
+                                        <a class="waves-effect waves-light btn indigo darken-4" ng-click="genPin(3)"><i class="material-icons right">tap_and_play</i>Generate 250 PIN (<small><s>N</s>200/1 day</small>)</a>
+                                    {{/pinDArrAvailablePins}}
+                                    {{^pinDArrAvailablePins}}
+                                        <button disabled class="waves-effect waves-light btn indigo darken-4" ng-click="genPin(3)"><i class="material-icons right">tap_and_play</i>Generate 250 PIN (<small><s>N</s>200/1 day</small>)</button>
+                                    {{/pinDArrAvailablePins}} 
+                                </div>  
+                                                               
+                            </div>         
+                            <div class="responsive-table">
+                                <table id="pinDTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Serial</th>
+                                            <th>PIN</th>
+                                            <th>Used</th>
+                                            <th>UsedBy</th>
+                                            <th>Date Used</th>
+                                        </tr>
+                                    </thead>
+                            
+                                    <tbody>
+                                        {{#pinsD}}
+                                            {{#hasSold}}
+                                                <tr class="red lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>{{usedBy}}</td>  
+                                                    <td>{{dateUsed}}</td>                                          
+                                                </tr>
+                                            {{/hasSold}}
+                                            {{^hasSold}}
+                                                <tr class="indigo lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>?</td>    
+                                                    <td>?</td>                                         
+                                                </tr>
+                                            {{/hasSold}}
+                                        {{/pinsD}}
+                                    </tbody>
+                                </table>
+                            </div>    
+                        </div>
+                        <div id="demo" class="col s12">
+                            <div class="row gutter">
+                                <div class="col s6">
+                                    <div class="input-field col s12">
+                                        <input id="searchD" type="search" class="validate" ng-keyup="pinMSearch($event, 'pinDemoTable')">
+                                        <label>Search Demo PIN...</label>
+                                    </div>
+                                </div>
+                                <div class="col s6">
+                                    {{#pinDemoArrAvailablePins}}
+                                        <a class="waves-effect waves-light btn lime darken-4" ng-click="genPin(4)"><i class="material-icons right">tap_and_play</i>Generate 250 PIN (<small>DEMO/1 days</small>)</a>
+                                    {{/pinDemoArrAvailablePins}}
+                                    {{^pinDemoArrAvailablePins}}
+                                        <button disabled class="waves-effect waves-light btn lime darken-4" ng-click="genPin(4)"><i class="material-icons right">tap_and_play</i>Generate 250 PIN (<small>DEMO/1 days</small>)</button>
+                                    {{/pinDemoArrAvailablePins}} 
+                                </div>    
+                            </div>  
+                            <div class="responsive-table">
+                                <table id="pinDemoTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Serial</th>
+                                            <th>PIN</th>
+                                            <th>Used</th>
+                                            <th>UsedBy</th>
+                                            <th>Date Used</th>
+                                        </tr>
+                                    </thead>
+                            
+                                    <tbody>
+                                        {{#pinsDemo}}
+                                            {{#hasSold}}
+                                                <tr class="red lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>{{usedBy}}</td>  
+                                                    <td>{{dateUsed}}</td>                                          
+                                                </tr>
+                                            {{/hasSold}}
+                                            {{^hasSold}}
+                                                <tr class="lime lighten-4">
+                                                    <td>{{_id}}</td>
+                                                    <td>{{digit}}</td>
+                                                    <td>{{used}}</td>
+                                                    <td>?</td>    
+                                                    <td>?</td>                                         
+                                                </tr>
+                                            {{/hasSold}}
+                                        {{/pinsDemo}}
+                                    </tbody>
+                                </table>
+                            </div>                               
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <!--div class="col s6"></div-->
+        </div>
+
+		<script src="./js/socket.js"></script>
+		<script src="./js/jquery-3.0.0.min.js"></script>
+		<script src="./js/materialize.min.js"></script>
+		<script src="./js/angular.min.js"></script>
+		<script src="./js/ozTV.js"></script>
+
+	</body>
+</html>
+
+
+
+
